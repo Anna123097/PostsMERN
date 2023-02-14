@@ -1,0 +1,195 @@
+API BASE URL: http://localhost:5000/api
+
+
+AUTH REQUESTS:
+
+headers: {
+  Authorization: 'token'
+}
+
+
+
+
+
+
+
+<------------------- USER ----------------------->
+
+
+POST /users/signup - user signup
+
+example payload: 
+{
+ "username": "alex",
+ "email": "alex@gmail.com", 
+ "password": "pass123"
+}
+
+example response: 
+{
+  "user": {
+    "_id": "63b44910a916bcea655fa767",
+    "username": "alex",
+    "email": "alex@gmail.com"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2I0NDkxMGE5MTZiY2VhNjU1ZmE3NjciLCJ1c2VybmFtZSI6ImFsZXgiLCJlbWFpbCI6ImFsZXhAZ21haWwuY29tIiwiaWF0IjoxNjcyNzU5NTY4fQ.ruyLWGe_Uyg9ZwQpe7zXR_Ije5MrIXpDM_DLv62nvG0"
+}
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+POST /users/login - user login
+
+example payload: 
+{
+ "username": "alex",
+ "password": "pass123"
+}
+
+example successful response: 
+{
+  "user": {
+    "_id": "63b44910a916bcea655fa767",
+    "username": "alex",
+    "email": "alex@gmail.com"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2I0NDkxMGE5MTZiY2VhNjU1ZmE3NjciLCJ1c2VybmFtZSI6ImFsZXgiLCJlbWFpbCI6ImFsZXhAZ21haWwuY29tIiwiaWF0IjoxNjcyNzU5ODE4fQ.tZyHoG5WPeRmIn5RTJ0C6Q2xgcEW7cfXRfIB7ozcdDk"
+}
+
+example unsuccessful response:
+STATUS CODE: 400 Bad Request
+{
+  "message": "Wrong passwword"
+}
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+GET /users/checkAuth - get user data by token <AUTH REQUEST>
+
+example response: 
+{
+  "user": {
+    "_id": "63b44910a916bcea655fa767",
+    "username": "Misha",
+    "email": "alex@gmail.com"
+  }
+}
+
+
+
+
+
+
+
+
+<------------------- POSTS ----------------------->
+
+
+POST /posts/create - create post
+{
+  "description": "New post4"
+}
+
+
+response:
+{
+  "post": {
+    "description": "New post4",
+    "author": {
+      "_id": "63b44910a916bcea655fa767",
+      "username": "Misha"
+    },
+    "likes": [],
+    "_id": "63b853db9228aa44068b758f",
+    "createdAt": "2023-01-06T17:01:15.067Z",
+    "updatedAt": "2023-01-06T17:01:15.067Z",
+    "__v": 0
+  }
+}
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+GET /posts/getUserPosts - get user posts by user id (page is optional, default: 1)
+{
+  "id": "63b44910a916bcea655fa767",
+  "page": 1
+}
+
+response:
+{
+  "posts": [
+    {
+      "_id": "63b8547f5d1e2f5e38a01e49",
+      "description": "New post4",
+      "author": {
+        "_id": "63b44910a916bcea655fa767",
+        "username": "Misha"
+      },
+      "likes": [],
+      isLiked: true,
+      "createdAt": "2023-01-06T17:03:59.081Z",
+      "updatedAt": "2023-01-06T17:03:59.081Z",
+      "__v": 0
+    },
+    {
+      "_id": "63b853db9228aa44068b758f",
+      "description": "New post4",
+      "author": {
+        "_id": "63b44910a916bcea655fa767",
+        "username": "Misha"
+      },
+      "likes": [],
+      isLiked: true,
+      "createdAt": "2023-01-06T17:01:15.067Z",
+      "updatedAt": "2023-01-06T17:01:15.067Z",
+      "__v": 0
+    }
+  ]
+}
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+GET /posts/getAll - get all posts  (page is optional, default: 1)
+{
+  "page": 1
+}
+
+
+response:
+{
+  "posts": [
+    {
+      "_id": "63b8547f5d1e2f5e38a01e49",
+      "description": "New post4",
+      "author": {
+        "_id": "63b44910a916bcea655fa767",
+        "username": "Misha"
+      },
+      "likes": [],
+      isLiked: true,
+      "createdAt": "2023-01-06T17:03:59.081Z",
+      "updatedAt": "2023-01-06T17:03:59.081Z",
+      "__v": 0
+    },
+    {
+      "_id": "63b853db9228aa44068b758f",
+      "description": "New post4",
+      "author": {
+        "_id": "63b44910a916bcea655fa767",
+        "username": "Misha"
+      },
+      "likes": [],
+      isLiked: true,
+      "createdAt": "2023-01-06T17:01:15.067Z",
+      "updatedAt": "2023-01-06T17:01:15.067Z",
+      "__v": 0
+    }
+  ]
+}
